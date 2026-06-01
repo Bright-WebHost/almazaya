@@ -28,7 +28,7 @@ export default function Navbar() {
             {['Home', 'Services', 'About', 'Doctors', 'Contact'].map((item) => (
               <Link
                 key={item}
-                href={`/${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300 relative group"
               >
                 {item}
@@ -66,7 +66,7 @@ export default function Navbar() {
             {['Home', 'Services', 'About', 'Doctors', 'Contact'].map((item) => (
               <Link
                 key={item}
-                href={`/${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className="block px-4 py-3 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
               >
                 {item}
