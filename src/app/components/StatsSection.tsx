@@ -1,72 +1,75 @@
-// src/app/components/StatsSection.tsx
-'use client'
+"use client";
 
-import { FiUsers, FiClock, FiAward, FiCheckCircle } from 'react-icons/fi'
+import React from "react";
 
-const stats = [
-  {
-    icon: FiUsers,
-    number: '80+',
-    label: 'Healthcare Professionals',
-    description: 'Experienced doctors and medical staff',
-  },
-  {
-    icon: FiClock,
-    number: '24/7',
-    label: 'Emergency Services',
-    description: 'Always available for urgent care',
-  },
-  {
-    icon: FiAward,
-    number: '2021',
-    label: 'Year Established',
-    description: 'Building excellence in healthcare',
-  },
-  {
-    icon: FiCheckCircle,
-    number: '100%',
-    label: 'Patient Satisfaction',
-    description: 'Committed to your wellbeing',
-  },
-]
+// Monotone premium styling logos extracted from your corporate profile
+const ARAMCO_CLIENTS = [
+  { name: "Nasser S. Al-Hajri Corp", short: "NSH" },
+  { name: "Saipem", short: "SAIPEM" },
+  { name: "Sinopec", short: "SINOPEC" },
+  { name: "Doosan", short: "DOOSAN" },
+  { name: "McDermott", short: "MCDERMOTT" },
+  { name: "Sino Hydro", short: "SINOHYDRO" },
+];
 
-export default function StatsSection() {
+const NON_ARAMCO_CLIENTS = [
+  { name: "Al Sharif Group", short: "ASG" },
+  { name: "KEC Ltd", short: "KEC" },
+  { name: "Expertise Contracting", short: "EXPERTISE" },
+  { name: "Abaja Contracting", short: "ABAJA" },
+];
+
+export default function IndustrialMarquee() {
+  const allClients = [...ARAMCO_CLIENTS, ...NON_ARAMCO_CLIENTS];
+  
+  // Duplicate the array to create a seamless infinite illusion loop
+  const doubleClients = [...allClients, ...allClients, ...allClients];
+
   return (
-    <section className="py-20 lg:py-24 bg-white border-t border-gray-200">
-      <div className="container-custom">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Why Al Mazaya?
-          </h2>
-          <p className="text-lg text-gray-600">
-            We combine expertise, compassion, and cutting-edge technology to deliver exceptional healthcare outcomes.
-          </p>
-        </div>
+    <section className="relative w-full bg-black py-12 overflow-hidden border-y border-neutral-900">
+      {/* Decorative Gradient Overlays for a high-end fade out on edges */}
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon
-            return (
-              <div
-                key={index}
-                className="group flex h-full flex-col justify-between rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md"
-              >
-                {/* Icon Container */}
-                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-100 group-hover:scale-110 transition-all duration-300">
-                  <Icon className="w-6 h-6 text-blue-600" />
-                </div>
+      <div className="max-w-7xl mx-auto px-6 mb-6">
+        <p className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500">
+          Trusted Field Partners // Heavy Industrial Sectors
+        </p>
+      </div>
 
-                {/* Content */}
-                <div className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{stat.label}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{stat.description}</p>
-              </div>
-            )
-          })}
+      {/* Marquee Track Container */}
+      <div className="flex w-full overflow-hidden">
+        <div className="flex whitespace-nowrap animate-marquee py-4">
+          {doubleClients.map((client, idx) => (
+            <div
+              key={`${client.short}-${idx}`}
+              className="inline-flex flex-col items-center justify-center mx-12 group cursor-default"
+            >
+              {/* Premium Minimalistic Logo Placeholder with a slick hover lift */}
+              <span className="text-xl md:text-2xl font-black tracking-tighter text-neutral-600 transition-colors duration-300 group-hover:text-white select-none">
+                {client.short}
+              </span>
+              <span className="text-[10px] font-medium tracking-wide text-neutral-700 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 max-w-[140px] text-center truncate">
+                {client.name}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Add custom marquee logic directly via style injection or your global CSS file */}
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-33.33%); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
-  )
+  );
 }

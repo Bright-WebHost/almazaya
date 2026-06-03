@@ -12,7 +12,7 @@ const features = [
     shortTitle: 'Care',
     description: 'Always available when you need us. Our rapid-response ambulance fleet and dedicated ER facility are operational round-the-clock.',
     icon: Clock,
-    image: 'https://images.unsplash.com/photo-1587559070757-f72a388edbba?q=80&w=2000',
+    image: '/emergency.png',
   },
   {
     id: '02',
@@ -20,7 +20,7 @@ const features = [
     shortTitle: 'Doctors',
     description: 'A highly qualified and experienced team of specialists dedicated to delivering precise diagnoses and your complete wellbeing.',
     icon: UserCheck,
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2000',
+    image: '/doctor.png',
   },
   {
     id: '03',
@@ -28,7 +28,7 @@ const features = [
     shortTitle: 'Facility',
     description: 'Outfitted with the latest medical equipment and cutting-edge healthcare technology to ensure world-class treatment.',
     icon: Building2,
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2000',
+    image: '/modern.png',
   },
   {
     id: '04',
@@ -36,7 +36,7 @@ const features = [
     shortTitle: 'Focused',
     description: 'Your health, comfort, and safety are our absolute priorities at every single step of your care journey.',
     icon: HeartPulse,
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000',
+    image: '/petient.png',
   },
 ]
 

@@ -41,11 +41,11 @@ export function Hero({
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2000",
+    image: "/hero/hero1.jpg",
     label: "ADVANCED MEDICAL CARE"
   },
   {
-    image: "https://images.unsplash.com/photo-1587559070757-f72a388edbba?q=80&w=2000",
+    image: "/hero/hero2.png",
     label: "INDUSTRIAL HEALTH SERVICES"
   },
   {
