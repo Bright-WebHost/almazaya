@@ -174,10 +174,10 @@ const services = [
 ]
 
 const filters: { key: FilterKey; label: string }[] = [
-  { key: 'all',        label: 'All Services' },
+  { key: 'all',         label: 'All Services' },
   { key: 'specialties', label: 'Specialties' },
-  { key: 'procedures', label: 'Procedures' },
-  { key: 'emergency',  label: 'Emergency' },
+  { key: 'procedures',  label: 'Procedures' },
+  { key: 'emergency',   label: 'Emergency' },
 ]
 
 const faqs = [
@@ -250,14 +250,14 @@ function HeroSection() {
       {/* Content */}
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-20 mx-auto flex min-h-screen max-w-[1400px] flex-col justify-end px-6 pb-20 pt-36 lg:px-10 lg:pb-28"
+        className="relative z-20 mx-auto flex min-h-screen max-w-[1400px] flex-col justify-end px-6 pb-16 pt-36 lg:px-10 lg:pb-20"
       >
         {/* Breadcrumb */}
         <motion.nav
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-10 flex items-center gap-2 text-xs text-white/35"
+          className="mb-8 flex items-center gap-2 text-xs text-white/35"
           aria-label="Breadcrumb"
         >
           <Link href="/" className="transition-colors hover:text-[#D4B670]">Home</Link>
@@ -270,7 +270,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#D4B670]"
+            className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#D4B670]"
           >
             <span className="h-px w-8 bg-[#D4B670]" />
             Al Mazaya Advanced Medical Complex
@@ -280,7 +280,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 text-[clamp(2.8rem,7vw,6.5rem)] font-medium leading-[0.95] tracking-[-0.03em] text-white"
+            className="mb-6 text-[clamp(2.8rem,7vw,6.5rem)] font-medium leading-[0.95] tracking-[-0.03em] text-white"
           >
             Comprehensive<br />
             <span className="font-serif italic text-white/70">Medical</span>{' '}
@@ -291,7 +291,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="mb-10 max-w-lg text-base font-light leading-relaxed text-white/55 md:text-lg"
+            className="mb-8 max-w-lg text-base font-light leading-relaxed text-white/55 md:text-lg"
           >
             Healthcare for individuals, families, and the Kingdom's industrial workforce — all in one place in Dammam.
           </motion.p>
@@ -313,12 +313,12 @@ function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Stat strip */}
+        {/* Stat strip — reduced mt-16→mt-8, pt-10→pt-7 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-16 grid grid-cols-2 gap-6 border-t border-white/10 pt-10 sm:grid-cols-4"
+          className="mt-8 grid grid-cols-2 gap-6 border-t border-white/10 pt-7 sm:grid-cols-4"
         >
           {[
             { v: '13+',  l: 'Medical Specialties' },
@@ -387,7 +387,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className={`relative overflow-hidden ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
         >
-          <div className="relative h-[340px] w-full overflow-hidden lg:h-[500px]">
+          <div className="relative h-[300px] w-full overflow-hidden lg:h-[440px]">
             <img
               src={`https://images.unsplash.com/${service.img}?auto=format&fit=crop&w=900&q=80`}
               alt={service.imgAlt}
@@ -421,25 +421,25 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
           </div>
         </motion.div>
 
-        {/* TEXT */}
+        {/* TEXT — reduced py-12→py-9, lg:py-16→lg:py-12 */}
         <motion.div
           initial={{ opacity: 0, x: isEven ? 36 : -36 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className={`flex flex-col justify-center px-6 py-12 lg:px-0 lg:py-16 ${
+          className={`flex flex-col justify-center px-6 py-9 lg:px-0 lg:py-12 ${
             isEven
               ? 'lg:order-2 lg:pl-14 lg:pr-10'
               : 'lg:order-1 lg:pl-10 lg:pr-14'
           }`}
         >
           {/* Index label */}
-          <p className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D4B670]">
+          <p className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D4B670]">
             <span className="font-mono text-[#174440]/20">{service.num}</span>
             {service.sub}
           </p>
 
           {/* Title — last word italic serif */}
-          <h2 className="mb-5 text-[clamp(1.9rem,3vw,2.9rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[#174440]">
+          <h2 className="mb-4 text-[clamp(1.9rem,3vw,2.9rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[#174440]">
             {service.title.split(' ').slice(0, -1).join(' ')}{' '}
             <span className="font-serif italic text-[#174440]/60">
               {service.title.split(' ').slice(-1)[0]}
@@ -447,12 +447,12 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
           </h2>
 
           {/* Description */}
-          <p className="mb-8 text-[0.94rem] font-light leading-relaxed text-[#174440]/58">
+          <p className="mb-6 text-[0.94rem] font-light leading-relaxed text-[#174440]/58">
             {service.desc}
           </p>
 
           {/* Features */}
-          <div className="mb-10 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {service.details.map((d) => (
               <div key={d} className="flex items-center gap-3">
                 <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#D4B670]/22">
@@ -495,7 +495,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-start justify-between gap-6 py-7 text-left"
+        className="flex w-full items-start justify-between gap-6 py-6 text-left"
         aria-expanded={open}
       >
         <div className="flex items-start gap-5">
@@ -524,7 +524,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.32, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <p className="pb-8 pl-9 pr-10 text-[0.92rem] font-light leading-relaxed text-[#174440]/55">
+            <p className="pb-6 pl-9 pr-10 text-[0.92rem] font-light leading-relaxed text-[#174440]/55">
               {faq.a}
             </p>
           </motion.div>
@@ -543,7 +543,7 @@ function CTASection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#174440] py-28 lg:py-36">
+    <section ref={ref} className="relative overflow-hidden bg-[#174440] py-20 lg:py-28">
       {/* Subtle background image with parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
         <img
@@ -557,7 +557,7 @@ function CTASection() {
       <div className="pointer-events-none absolute right-0 top-0 z-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/3 rounded-full bg-[#D4B670]/07 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
 
           {/* Left */}
           <motion.div
@@ -565,16 +565,16 @@ function CTASection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4B670]">
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4B670]">
               <span className="h-px w-8 bg-[#D4B670]" />
               Contact Us
             </p>
-            <h2 className="mb-6 text-[clamp(2rem,4vw,3.6rem)] font-medium leading-[1.06] tracking-[-0.02em] text-white">
+            <h2 className="mb-5 text-[clamp(2rem,4vw,3.6rem)] font-medium leading-[1.06] tracking-[-0.02em] text-white">
               Can't find what<br />
               you're looking{' '}
               <span className="font-serif italic text-[#D4B670]">for?</span>
             </h2>
-            <p className="mb-10 max-w-md text-base font-light leading-relaxed text-white/45">
+            <p className="mb-8 max-w-md text-base font-light leading-relaxed text-white/45">
               Talk to our team. We'll help you find the right service or specialist and book a time that works for you.
             </p>
 
@@ -605,7 +605,7 @@ function CTASection() {
             </div>
           </motion.div>
 
-          {/* Right — simple info blocks, no fake reviews */}
+          {/* Right — info blocks */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -688,10 +688,10 @@ export default function ServicesPage() {
         </AnimatePresence>
       </section>
 
-      {/* 4. FAQ */}
-      <section className="py-20 lg:py-28">
+      {/* 4. FAQ — reduced py-20→py-14, lg:py-28→lg:py-20 */}
+      <section className="py-14 lg:py-20">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-[360px_1fr] lg:gap-24">
+          <div className="grid gap-14 lg:grid-cols-[360px_1fr] lg:gap-20">
 
             {/* Sticky left heading */}
             <div className="lg:sticky lg:top-28 lg:self-start">
@@ -705,11 +705,11 @@ export default function ServicesPage() {
                   <span className="h-px w-8 bg-[#D4B670]" />
                   FAQ
                 </p>
-                <h2 className="mb-5 text-3xl font-medium leading-tight tracking-[-0.02em] text-[#174440] lg:text-4xl">
+                <h2 className="mb-4 text-3xl font-medium leading-tight tracking-[-0.02em] text-[#174440] lg:text-4xl">
                   Common questions about{' '}
                   <span className="font-serif italic text-[#174440]/60">our services</span>
                 </h2>
-                <p className="mb-8 text-sm font-light leading-relaxed text-[#174440]/45">
+                <p className="mb-6 text-sm font-light leading-relaxed text-[#174440]/45">
                   If your question isn't listed here, call us or send a message — we're happy to help.
                 </p>
                 <Link

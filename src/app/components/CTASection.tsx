@@ -26,11 +26,12 @@ export default function CTASection() {
   }
 
   return (
-    <section className="w-full bg-[#FAF9F6] px-4 pb-20 sm:px-6 lg:px-10 lg:pb-32">
+    // Reduced outer bottom padding from pb-32 to pb-16/20
+    <section className="w-full bg-[#FAF9F6] px-4 pb-16 sm:px-6 lg:px-10 lg:pb-20">
       <div className="mx-auto max-w-[1400px]">
         
-        {/* Floating Dark Card Container */}
-        <div className="relative overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] bg-[#174440] px-6 py-16 shadow-2xl sm:px-12 md:px-16 lg:py-32 text-center">
+        {/* Floating Dark Card Container - Reduced internal vertical padding from py-32 to py-16/20 */}
+        <div className="relative overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] bg-[#174440] px-6 py-12 shadow-2xl sm:px-12 md:px-16 lg:py-20 text-center">
           
           {/* Breathing Ambient Glow Effect */}
           <motion.div 
@@ -59,17 +60,18 @@ export default function CTASection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-4 sm:mb-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[#D4B670]"
+              className="mb-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[#D4B670]"
             >
               Take The Next Step
             </motion.p>
             
+            {/* Reduced bottom margin from mb-12 to mb-8 */}
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="mb-10 sm:mb-12 text-[2.25rem] font-medium leading-[1.1] tracking-tight text-white sm:text-[3rem] md:text-[4rem] lg:text-[4.5rem]"
+              className="mb-8 sm:mb-10 text-[2.25rem] font-medium leading-[1.1] tracking-tight text-white sm:text-[3rem] md:text-[4rem]"
             >
               Ready to Book <br />
               <span className="font-serif italic text-white/80">Your Appointment?</span>

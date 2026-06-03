@@ -33,7 +33,8 @@ const stats = [
 
 export default function IntroSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#FAF9F6] py-16 md:py-24 lg:py-32">
+    // Reduced the heavy top and bottom padding (changed from py-32 to py-16/20)
+    <section className="relative w-full overflow-hidden bg-[#FAF9F6] py-12 md:py-16 lg:py-20">
       
       {/* Subtle Background Elements */}
       <div className="pointer-events-none absolute right-0 top-0 z-0 h-[400px] w-[400px] md:h-[600px] md:w-[600px] translate-x-1/3 -translate-y-1/4 rounded-full bg-[#D4B670]/10 blur-[100px] md:blur-[120px]"></div>
@@ -41,8 +42,8 @@ export default function IntroSection() {
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         
-        {/* Editorial Layout: Left Text, Right Accent */}
-        <div className="mb-16 md:mb-20 grid grid-cols-1 gap-8 lg:grid-cols-12 items-end">
+        {/* Editorial Layout: Reduced margin-bottom to close the gap to the cards */}
+        <div className="mb-10 md:mb-12 grid grid-cols-1 gap-6 lg:grid-cols-12 items-end">
           
           <div className="lg:col-span-8">
             <motion.div 
@@ -50,7 +51,7 @@ export default function IntroSection() {
               whileInView={{ opacity: 1, width: '40px' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-6 md:mb-8 h-[2px] bg-[#D4B670]"
+              className="mb-4 md:mb-6 h-[2px] bg-[#D4B670]"
             />
             
             <motion.h2 
@@ -58,14 +59,15 @@ export default function IntroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[2rem] sm:text-[2.5rem] font-medium leading-[1.1] tracking-tight text-[#174440] md:text-[4rem] lg:text-[4.5rem]"
+              className="text-[2rem] sm:text-[2.5rem] font-medium leading-[1.1] tracking-tight text-[#174440] md:text-[3.5rem] lg:text-[4rem]"
             >
               Your trusted partner in <br className="hidden md:block" />
               <span className="font-serif italic text-[#174440]/80">health and wellness.</span>
             </motion.h2>
           </div>
 
-          <div className="lg:col-span-4 lg:pb-3">
+          {/* Removed the extra lg:pb-3 to align text better */}
+          <div className="lg:col-span-4">
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -79,8 +81,8 @@ export default function IntroSection() {
 
         </div>
 
-        {/* Floating Stats Grid - Responsive 2x2 on Mobile */}
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4 pt-4 md:pt-10">
+        {/* Floating Stats Grid - Removed the extra pt-10 to bring cards up */}
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
@@ -90,16 +92,16 @@ export default function IntroSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/40 bg-white/60 backdrop-blur-sm p-5 sm:p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_40px_rgba(23,68,64,0.06)]"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/40 bg-white/60 backdrop-blur-sm p-5 sm:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_40px_rgba(23,68,64,0.06)]"
               >
-                {/* Top Right Decorative Arrow - Hidden on small mobile to save space */}
-                <div className="absolute right-4 top-4 sm:right-6 sm:top-6 opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 hidden sm:block">
+                {/* Top Right Decorative Arrow */}
+                <div className="absolute right-4 top-4 sm:right-5 sm:top-5 opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 hidden sm:block">
                   <ArrowRight className="h-5 w-5 text-[#D4B670]" />
                 </div>
 
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-6 sm:mb-8 md:mb-10 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#FAF9F6] border border-[#174440]/5 transition-colors duration-500 group-hover:bg-[#174440] group-hover:border-transparent">
+                  {/* Icon Container - Reduced bottom margin to tighten card content */}
+                  <div className="mb-4 sm:mb-6 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#FAF9F6] border border-[#174440]/5 transition-colors duration-500 group-hover:bg-[#174440] group-hover:border-transparent">
                     <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#174440] transition-colors duration-500 group-hover:text-[#D4B670]" strokeWidth={1.5} />
                   </div>
 

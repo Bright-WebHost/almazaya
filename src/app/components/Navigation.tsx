@@ -22,8 +22,8 @@ export default function Navbar() {
   // Updated hrefs to point to actual pages instead of ID sections
   const menuItems = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
     { label: 'About Us', href: '/about' },
+    { label: 'Services', href: '/services' },
     { label: 'Doctors', href: '/doctors' },
     { label: 'Contact', href: '/contact' },
   ]
@@ -32,7 +32,7 @@ export default function Navbar() {
     <nav className="fixed inset-x-0 top-0 z-50 flex w-full justify-center px-4 pt-6 pointer-events-none">
       
       <div
-        className={`pointer-events-auto flex w-full max-w-[1400px] items-center justify-between rounded-full border px-6 py-3 transition-all duration-500 lg:px-8 ${
+        className={`pointer-events-auto flex w-full max-w-350 items-center justify-between rounded-full border px-6 py-3 transition-all duration-500 lg:px-8 ${
           scrolled
             ? 'border-[#174440]/10 bg-white/90 shadow-[0_8px_32px_rgba(23,68,64,0.05)] backdrop-blur-2xl'
             : 'border-transparent bg-transparent'

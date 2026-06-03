@@ -44,24 +44,20 @@ export default function WhyChooseSection() {
   const [activeIndex, setActiveIndex] = useState(0)
 
   return (
-    <section className="relative w-full bg-[#FAF9F6] pt-12 pb-24 lg:pt-20 lg:pb-32">
+    // Aggressively reduced top padding (pt-12 -> pt-4 and lg:pt-20 -> lg:pt-8)
+    <section className="relative w-full bg-[#FAF9F6] pt-4 pb-16 lg:pt-8 lg:pb-20">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         
-        <div className="mb-8 md:mb-16">
+        <div className="mb-8 md:mb-10">
           <h2 className="text-2xl font-medium tracking-tight text-[#174440] sm:text-3xl md:text-5xl lg:text-[4rem]">
             Why Choose <span className="font-serif italic text-[#174440]/80">Al Mazaya?</span>
           </h2>
         </div>
 
-        {/* Grid layout applied to all screens.
-          Mobile uses 2 columns (1 for image, 1 for text) but scaled differently than desktop.
-        */}
         <div className="flex flex-row gap-4 sm:gap-8 lg:grid lg:grid-cols-12 lg:gap-16">
           
           {/* Left Column - Sticky Media Container */}
-          {/* Mobile: 40% width. Desktop: 5/12 columns */}
           <div className="w-[40%] lg:w-auto lg:col-span-5 relative z-10">
-            {/* Sticky container is shorter on mobile so it doesn't take the whole screen */}
             <div className="sticky top-20 sm:top-24 h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] w-full overflow-hidden rounded-xl sm:rounded-[2rem] bg-[#174440] shadow-2xl">
               
               {features.map((feature, index) => {
@@ -102,7 +98,6 @@ export default function WhyChooseSection() {
                       <div className="mb-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#D4B670] sm:mb-2 sm:h-8 sm:w-8 md:mb-3 md:h-10 md:w-10">
                         <ActiveIcon className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-[#174440]" strokeWidth={1.5} />
                       </div>
-                      {/* Hide description on very small screens to save space, show on larger */}
                       <p className="hidden text-[10px] font-light leading-relaxed text-white sm:block sm:text-xs md:text-sm lg:text-base">
                         {feature.description}
                       </p>
@@ -115,10 +110,9 @@ export default function WhyChooseSection() {
           </div>
 
           {/* Right Column - Interactive List */}
-          {/* Mobile: 60% width. Desktop: 7/12 columns */}
           <div className="w-[60%] lg:w-auto lg:col-span-7 relative z-0 flex flex-col justify-center">
-            {/* Added margin bottom so the last item can scroll up high enough */}
-            <div className="flex w-full flex-col border-t border-[#174440]/10 mb-20 lg:mb-32">
+            
+            <div className="flex w-full flex-col border-t border-[#174440]/10 mb-10 lg:mb-16">
               {features.map((feature, index) => {
                 const isActive = activeIndex === index
 
@@ -129,7 +123,7 @@ export default function WhyChooseSection() {
                     viewport={{ margin: "-30% 0px -30% 0px" }}
                     onMouseEnter={() => setActiveIndex(index)}
                     onClick={() => setActiveIndex(index)}
-                    className="group flex w-full cursor-pointer flex-col items-start gap-1 sm:gap-2 lg:flex-row lg:items-center lg:gap-8 border-b border-[#174440]/10 py-4 sm:py-6 lg:py-12"
+                    className="group flex w-full cursor-pointer flex-col items-start gap-1 sm:gap-2 lg:flex-row lg:items-center lg:gap-8 border-b border-[#174440]/10 py-4 sm:py-6 lg:py-8"
                   >
                     
                     <span className={`text-[10px] sm:text-xs font-bold transition-colors duration-300 md:text-base ${
@@ -138,8 +132,7 @@ export default function WhyChooseSection() {
                       {feature.id}
                     </span>
 
-                    {/* Scaled typography for mobile */}
-                    <h3 className="flex flex-col text-lg sm:text-2xl md:text-3xl lg:text-[4.5rem] font-medium leading-[1.1] sm:leading-[1.05] lg:leading-[0.9] tracking-tight">
+                    <h3 className="flex flex-col text-lg sm:text-2xl md:text-3xl lg:text-[4rem] font-medium leading-[1.1] sm:leading-[1.05] lg:leading-[0.9] tracking-tight">
                       
                       <span className={`transition-all duration-300 ${
                         isActive 

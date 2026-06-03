@@ -25,7 +25,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {['Home', 'Services', 'About', 'Doctors', 'Contact'].map((item) => (
+            {['Home', 'About', 'Services', 'Doctors', 'Contact'].map((item) => (
               <Link
                 key={item}
                 href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
@@ -63,7 +63,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden pb-4 border-t border-gray-100">
-            {['Home', 'Services', 'About', 'Doctors', 'Contact'].map((item) => (
+            {['Home', 'About', 'Services', 'Doctors', 'Contact'].map((item) => (
               <Link
                 key={item}
                 href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
