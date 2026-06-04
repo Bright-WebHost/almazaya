@@ -24,7 +24,7 @@ const services = [
     badge: '24 / 7',
     desc: 'Round-the-clock emergency care with trained trauma teams, rapid-response ambulances meeting MMSR-JHAH standards, and a fully equipped ER facility in central Dammam.',
     details: ['24/7 Emergency Department', 'MMSR-JHAH Ambulance Fleet', 'Trauma & Life Support', 'Industrial RAC Response'],
-    img: 'photo-1587351021759-3e566b6af7cc',
+    img: '/emergency.png',
     imgAlt: 'Emergency medical team',
   },
   {
@@ -48,7 +48,7 @@ const services = [
     badge: null,
     desc: 'Heart care with ECG analysis, echocardiography, and specialist-led preventive programmes tailored to your cardiac risk profile.',
     details: ['ECG & Holter Monitoring', 'Echocardiography', 'Stress Testing', 'Preventive Cardiology'],
-    img: 'photo-1576091160399-112ba8d25d1d',
+    img: '/doctor.png',
     imgAlt: 'Cardiology diagnostics',
   },
   {
@@ -187,7 +187,7 @@ const faqs = [
   },
   {
     q: 'Which insurance providers do you accept?',
-    a: 'We accept most major insurance networks in the Kingdom. Call 920013822 or bring your insurance card to reception before your visit so we can confirm your cover.',
+    a: 'We accept most major insurance networks in the Kingdom. Call +966 50 538 7020 or bring your insurance card to reception before your visit so we can confirm your cover.',
   },
   {
     q: 'Are industrial health services available outside Dammam?',
@@ -306,9 +306,9 @@ function HeroSection() {
               Book an Appointment
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </button>
-            <a href="tel:920013822" className="flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-white">
+            <a href="tel:+966505387020" className="flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-white">
               <Phone className="h-4 w-4" strokeWidth={1.8} />
-              920013822
+              +966 50 538 7020
             </a>
           </motion.div>
         </div>
@@ -374,6 +374,9 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const isEven = index % 2 === 0
   const Icon = service.icon
+  const imageSrc = service.img.startsWith('/')
+    ? service.img
+    : `https://images.unsplash.com/${service.img}?auto=format&fit=crop&w=900&q=80`
 
   return (
     <div ref={ref} className="group relative border-b border-[#174440]/07 last:border-0">
@@ -389,7 +392,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
         >
           <div className="relative h-[300px] w-full overflow-hidden lg:h-[440px]">
             <img
-              src={`https://images.unsplash.com/${service.img}?auto=format&fit=crop&w=900&q=80`}
+              src={imageSrc}
               alt={service.imgAlt}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               loading="lazy"
@@ -580,14 +583,14 @@ function CTASection() {
 
             <div className="flex flex-wrap gap-3">
               <a
-                href="tel:920013822"
+                href="tel:+966505387020"
                 className="flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:bg-white active:scale-[0.97]"
               >
                 <Phone className="h-4 w-4" strokeWidth={2} />
                 Call Us
               </a>
               <a
-                href="https://wa.me/920013822"
+                href="https://wa.me/966505387020"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/65 transition-all hover:border-white/30 hover:text-white active:scale-[0.97]"
@@ -596,7 +599,7 @@ function CTASection() {
                 WhatsApp
               </a>
               <a
-                href="mailto:info@almazayamedical.com"
+                href="mailto:info@mazayamedical.co"
                 className="flex items-center gap-2.5 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/65 transition-all hover:border-white/30 hover:text-white active:scale-[0.97]"
               >
                 <Mail className="h-4 w-4" strokeWidth={1.8} />
@@ -620,8 +623,8 @@ function CTASection() {
               },
               {
                 label: 'Phone',
-                value: '920013822',
-                note: 'One number for appointments and all enquiries.',
+                value: '+966 50 538 7020',
+                note: 'Primary line for appointments and enquiries.',
               },
               {
                 label: 'Location',

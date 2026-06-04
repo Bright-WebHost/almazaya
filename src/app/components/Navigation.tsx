@@ -1,23 +1,12 @@
 // src/app/components/Navbar.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { FiMenu, FiX } from 'react-icons/fi'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   // Updated hrefs to point to actual pages instead of ID sections
   const menuItems = [
@@ -31,12 +20,9 @@ export default function Navbar() {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 flex w-full justify-center px-4 pt-6 pointer-events-none">
       
+      {/* Container - Transparent logic removed, solid/glass look applied permanently */}
       <div
-        className={`pointer-events-auto flex w-full max-w-350 items-center justify-between rounded-full border px-6 py-3 transition-all duration-500 lg:px-8 ${
-          scrolled
-            ? 'border-[#174440]/10 bg-white/90 shadow-[0_8px_32px_rgba(23,68,64,0.05)] backdrop-blur-2xl'
-            : 'border-transparent bg-transparent'
-        }`}
+        className="pointer-events-auto flex w-full max-w-[1350px] items-center justify-between rounded-full border px-6 py-3 transition-all duration-500 lg:px-8 border-[#174440]/10 bg-white/90 shadow-[0_8px_32px_rgba(23,68,64,0.05)] backdrop-blur-2xl"
       >
         
         {/* Left: Real Logo from Public Folder */}
@@ -54,9 +40,7 @@ export default function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className={`text-[15px] font-medium transition-colors duration-300 hover:text-[#D4B670] ${
-                scrolled ? 'text-[#174440]/80' : 'text-white/90'
-              }`}
+              className="text-[15px] font-medium transition-colors duration-300 text-[#174440]/80 hover:text-[#D4B670]"
             >
               {item.label}
             </Link>
@@ -65,11 +49,7 @@ export default function Navbar() {
 
         {/* Right: Book Appointment CTA */}
         <div className="hidden items-center lg:flex">
-          <button className={`rounded-full px-7 py-3 text-[15px] font-medium transition-all duration-300 ${
-            scrolled 
-              ? 'bg-[#174440] text-white hover:bg-[#113330] hover:shadow-[0_4px_20px_rgba(23,68,64,0.3)]' 
-              : 'bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-white/20'
-          }`}>
+          <button className="rounded-full px-7 py-3 text-[15px] font-medium transition-all duration-300 bg-[#174440] text-white hover:bg-[#113330] hover:shadow-[0_4px_20px_rgba(23,68,64,0.3)]">
             Book Appointment
           </button>
         </div>
@@ -77,9 +57,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`rounded-full p-2 transition-colors lg:hidden hover:bg-black/5 ${
-            scrolled ? 'text-[#174440]' : 'text-white'
-          }`}
+          className="rounded-full p-2 transition-colors lg:hidden hover:bg-black/5 text-[#174440]"
         >
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>

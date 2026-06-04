@@ -104,25 +104,30 @@ export default function Footer() {
                   <FiMapPin className="w-4 h-4 text-[#D4B670]" />
                 </div>
                 <p className="text-white/70 text-sm font-light leading-relaxed pt-2">
-                  Uhud neighborhood,<br />King Saud St, Dammam
+                  Uhud neighborhood,<br />King Saud St
                 </p>
               </div>
 
-              <div className="group flex items-center gap-4">
+              <div className="group flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/5 transition-colors duration-300 group-hover:bg-[#D4B670]/10">
                   <FiPhone className="w-4 h-4 text-[#D4B670]" />
                 </div>
-                <a href="tel:+966505387020" className="text-white/70 hover:text-white text-sm font-light transition-colors">
-                  +966 50 538 7020
-                </a>
+                <div className="flex flex-col gap-1 pt-1">
+                  <a href="tel:+966505387020" className="text-white/70 hover:text-white text-sm font-light transition-colors">
+                    +966 50 538 7020
+                  </a>
+                  <a href="tel:0138211212" className="text-white/70 hover:text-white text-sm font-light transition-colors">
+                    013 821 1212
+                  </a>
+                </div>
               </div>
 
               <div className="group flex items-center gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/5 transition-colors duration-300 group-hover:bg-[#D4B670]/10">
                   <FiMail className="w-4 h-4 text-[#D4B670]" />
                 </div>
-                <a href="mailto:info@mazayamedical.com" className="text-white/70 hover:text-white text-sm font-light transition-colors">
-                  info@mazayamedical.com
+                <a href="mailto:info@mazayamedical.co" className="text-white/70 hover:text-white text-sm font-light transition-colors">
+                  info@mazayamedical.co
                 </a>
               </div>
 

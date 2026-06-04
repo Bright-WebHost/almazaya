@@ -66,8 +66,12 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-dark mb-1">Phone</h3>
-                  <p className="text-neutral-600">+1 (555) 123-4567</p>
-                  <p className="text-sm text-neutral-500">Mon-Fri, 8am-6pm</p>
+                  <a href="tel:+966505387020" className="block text-neutral-600 hover:text-primary-600">
+                    +966 50 538 7020
+                  </a>
+                  <a href="tel:0138211212" className="block text-neutral-600 hover:text-primary-600">
+                    013 821 1212
+                  </a>
                 </div>
               </div>
 
@@ -78,8 +82,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-dark mb-1">Email</h3>
-                  <p className="text-neutral-600">info@healthhub.com</p>
-                  <p className="text-neutral-600">support@healthhub.com</p>
+                  <a href="mailto:info@mazayamedical.co" className="text-neutral-600 hover:text-primary-600">
+                    info@mazayamedical.co
+                  </a>
                 </div>
               </div>
 
@@ -90,8 +95,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-dark mb-1">Address</h3>
-                  <p className="text-neutral-600">123 Medical Center Drive</p>
-                  <p className="text-neutral-600">Health City, HC 12345</p>
+                  <p className="text-neutral-600">Uhud neighborhood</p>
+                  <p className="text-neutral-600">King Saud St</p>
                 </div>
               </div>
 
