@@ -2,7 +2,8 @@
 'use client'
 
 import { motion, Variants } from 'framer-motion'
-import { Phone, MessageCircle, Mail } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Mail, MessageCircle, Phone } from 'lucide-react'
 
 export default function CTASection() {
   const containerVariants: Variants = {
@@ -26,101 +27,100 @@ export default function CTASection() {
   }
 
   return (
-    // Reduced outer bottom padding from pb-32 to pb-16/20
     <section className="w-full bg-[#FAF9F6] px-4 pb-16 sm:px-6 lg:px-10 lg:pb-20">
-      <div className="mx-auto max-w-[1400px]">
-        
-        {/* Floating Dark Card Container - Reduced internal vertical padding from py-32 to py-16/20 */}
-        <div className="relative overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] bg-[#174440] px-6 py-12 shadow-2xl sm:px-12 md:px-16 lg:py-20 text-center">
-          
-          {/* Breathing Ambient Glow Effect */}
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: [0.2, 0.3, 0.2] 
-            }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-            className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[600px] rounded-[100%] bg-[#D4B670] blur-[100px]"
+      <div className="mx-auto max-w-350">
+        <div className="relative overflow-hidden rounded-4xl border border-[#174440]/10 bg-[#174440] shadow-[0_30px_80px_rgba(23,68,64,0.18)] sm:rounded-[2.5rem]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,182,112,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_30%)]" />
+          <motion.div
+            animate={{ scale: [1, 1.08, 1], opacity: [0.18, 0.28, 0.18] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            className="pointer-events-none absolute left-1/2 top-0 h-70 w-170 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4B670] blur-[120px]"
           />
-          
-          {/* Premium Noise Texture */}
-          <div 
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.04] mix-blend-overlay"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
           />
 
-          <div className="relative z-10 mx-auto max-w-3xl">
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
+          <div className="relative z-10 grid gap-10 px-6 py-12 sm:px-10 md:px-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-14 lg:py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[#D4B670]"
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              Take The Next Step
-            </motion.p>
-            
-            {/* Reduced bottom margin from mb-12 to mb-8 */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="mb-8 sm:mb-10 text-[2.25rem] font-medium leading-[1.1] tracking-tight text-white sm:text-[3rem] md:text-[4rem]"
-            >
-              Need Medical Care? <br />
-              <span className="font-serif italic text-white/80">Reach Our Team</span>
-            </motion.h2>
+              <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4B670]">
+                <span className="h-px w-8 bg-[#D4B670]" />
+                Need Support
+              </p>
+              <h2 className="max-w-xl text-[clamp(2.25rem,5vw,4.4rem)] font-medium leading-[0.96] tracking-[-0.03em] text-white">
+                Modern care,{' '}
+                <span className="font-serif italic text-[#F7E9C1]">clear next steps</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+                A refined contact section that matches the rest of the site with a premium look, stronger hierarchy, and faster access to your team.
+              </p>
 
-            {/* Buttons Container */}
-            <motion.div 
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="tel:+966505387020"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#D4B670] px-6 py-3.5 text-sm font-semibold text-[#174440] transition-transform hover:-translate-y-0.5 hover:bg-[#F3E0B0]"
+                >
+                  <Phone className="h-4 w-4 transition-transform group-hover:-rotate-12" strokeWidth={2} />
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/8 px-6 py-3.5 text-sm font-medium text-white/90 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/12"
+                >
+                  <Mail className="h-4 w-4" strokeWidth={1.8} />
+                  Send Message
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex flex-col items-center justify-center gap-3 sm:gap-4 sm:flex-row sm:flex-wrap"
+              className="grid gap-4 sm:grid-cols-2"
             >
-              
-              {/* Primary Action: Call Now */}
-              <motion.button 
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative flex w-full sm:w-auto items-center justify-center gap-3 rounded-full bg-[#D4B670] px-8 py-4 text-sm sm:text-base font-semibold text-[#174440] shadow-[0_0_30px_rgba(212,182,112,0.25)] transition-all hover:bg-white hover:shadow-[0_0_50px_rgba(255,255,255,0.35)]"
-              >
-                <Phone className="h-5 w-5 transition-transform group-hover:-rotate-12" />
-                <span>Call Now</span>
-              </motion.button>
-
-              {/* Secondary Action: WhatsApp */}
-              <motion.button 
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all hover:border-[#25D366]/50 hover:bg-[#25D366]/10 hover:text-[#25D366]"
-              >
-                <MessageCircle className="h-5 w-5" />
-                <span>WhatsApp Chat</span>
-              </motion.button>
-
-              {/* Tertiary Action: Email */}
-              <motion.button 
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-full border border-transparent px-8 py-4 text-sm sm:text-base font-medium text-white/70 transition-all hover:bg-white/5 hover:text-white"
-              >
-                <Mail className="h-5 w-5" />
-                <span>Send Message</span>
-              </motion.button>
-
+              {[
+                {
+                  title: '24/7 Response',
+                  text: 'Emergency care and fast triage when time matters most.',
+                  icon: Phone,
+                },
+                {
+                  title: 'WhatsApp Support',
+                  text: 'Instant communication with the front desk team.',
+                  icon: MessageCircle,
+                },
+                {
+                  title: 'Direct Email',
+                  text: 'Send questions, reports, or follow-up details.',
+                  icon: Mail,
+                },
+                {
+                  title: 'Premium Finish',
+                  text: 'Green, gold, and glass-like layers that match the brand.',
+                  icon: ArrowRight,
+                },
+              ].map((card) => (
+                <motion.div
+                  key={card.title}
+                  variants={itemVariants}
+                  className="rounded-3xl border border-white/10 bg-white/7 p-5 backdrop-blur-md"
+                >
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-[#D4B670]">
+                    <card.icon className="h-5 w-5" strokeWidth={1.9} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">{card.text}</p>
+                </motion.div>
+              ))}
             </motion.div>
-
           </div>
         </div>
       </div>

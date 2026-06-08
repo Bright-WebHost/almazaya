@@ -1,11 +1,16 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import Navbar from '@/app/components/Navigation' // Make sure this path matches your actual file
 import Footer from '@/app/components/Footer'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' })
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  weight: ['400', '500', '600', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Al Mazaya Medical Complex | Healthcare in Dammam',
@@ -20,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${manrope.variable} ${cormorant.variable}`}>
         <Navbar />
         {/* Removed pt-20 and bg-white so the Hero can reach the absolute top */}
         <main className="flex min-h-screen flex-col">

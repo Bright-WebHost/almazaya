@@ -218,8 +218,8 @@ function HeroSection() {
           alt="Al Mazaya Medical Complex"
           className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0e2724]/95 via-[#0e2724]/70 to-[#0e2724]/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2724]/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0e2724]/95 via-[#0e2724]/70 to-[#0e2724]/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0e2724]/80 via-transparent to-transparent" />
       </motion.div>
 
       {/* Noise grain */}
@@ -250,7 +250,7 @@ function HeroSection() {
       {/* Content */}
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-20 mx-auto flex min-h-screen max-w-[1400px] flex-col justify-end px-6 pb-16 pt-36 lg:px-10 lg:pb-20"
+        className="relative z-20 mx-auto flex min-h-screen max-w-350 flex-col justify-end px-6 pb-16 pt-36 lg:px-10 lg:pb-20"
       >
         {/* Breadcrumb */}
         <motion.nav
@@ -347,7 +347,7 @@ function FilterBar({ active, onChange, count }: {
 }) {
   return (
     <div className="sticky top-0 z-40 border-b border-[#174440]/08 bg-[#FAF9F6]/92 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1400px] items-center gap-2 overflow-x-auto px-6 py-3.5 lg:px-10">
+      <div className="mx-auto flex max-w-350 items-center gap-2 overflow-x-auto px-6 py-3.5 lg:px-10">
         {filters.map((f) => (
           <button
             key={f.key}
@@ -381,7 +381,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
   return (
     <div ref={ref} className="group relative border-b border-[#174440]/07 last:border-0">
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-stretch lg:grid-cols-2">
+      <div className="mx-auto grid max-w-350 grid-cols-1 items-stretch lg:grid-cols-2">
 
         {/* IMAGE */}
         <motion.div
@@ -390,7 +390,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className={`relative overflow-hidden ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
         >
-          <div className="relative h-[300px] w-full overflow-hidden lg:h-[440px]">
+          <div className="relative h-75 w-full overflow-hidden lg:h-110">
             <img
               src={imageSrc}
               alt={service.imgAlt}
@@ -398,7 +398,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
               loading="lazy"
             />
             {/* Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0e2724]/55 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#0e2724]/55 via-transparent to-transparent" />
 
             {/* Ghost number */}
             <span className="pointer-events-none absolute right-4 top-4 select-none font-serif text-[6rem] font-bold leading-none tracking-tighter text-white/08 lg:text-[8rem]">
@@ -466,17 +466,7 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-5">
-            <button className="group/btn flex items-center gap-2 rounded-full bg-[#174440] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[#0f2e2b] hover:shadow-[0_8px_28px_rgba(23,68,64,0.22)] active:scale-[0.97]">
-              Book Now
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" strokeWidth={2} />
-            </button>
-            <button className="group/lm flex items-center gap-1.5 text-sm font-medium text-[#174440]/50 transition-colors hover:text-[#174440]">
-              Learn More
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/lm:-translate-y-0.5 group-hover/lm:translate-x-0.5" strokeWidth={2} />
-            </button>
-          </div>
+          {/* Actions (removed Learn More button per request) */}
         </motion.div>
       </div>
     </div>
@@ -556,10 +546,10 @@ function CTASection() {
           className="h-full w-full object-cover opacity-10"
         />
       </motion.div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#174440] via-[#174440]/95 to-[#0d2320]" />
-      <div className="pointer-events-none absolute right-0 top-0 z-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/3 rounded-full bg-[#D4B670]/07 blur-[120px]" />
+      <div className="absolute inset-0 z-0 bg-linear-to-br from-[#174440] via-[#174440]/95 to-[#0d2320]" />
+      <div className="pointer-events-none absolute right-0 top-0 z-0 h-125 w-125 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#D4B670]/07 blur-[120px]" />
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-350 px-6 lg:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
 
           {/* Left */}
@@ -693,7 +683,7 @@ export default function ServicesPage() {
 
       {/* 4. FAQ — reduced py-20→py-14, lg:py-28→lg:py-20 */}
       <section className="py-14 lg:py-20">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+        <div className="mx-auto max-w-350 px-6 lg:px-10">
           <div className="grid gap-14 lg:grid-cols-[360px_1fr] lg:gap-20">
 
             {/* Sticky left heading */}
