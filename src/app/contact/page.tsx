@@ -222,15 +222,20 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  className="w-full"
-                  isLoading={isSubmitting}
-                >
-                  Send Message
-                </Button>
+                <div className="rounded-2xl border border-primary-100 bg-primary-50/60 p-4 shadow-sm">
+                  <p className="mb-3 text-sm text-neutral-600">
+                    Send your message directly to our team and we’ll get back to you soon.
+                  </p>
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    className="w-full bg-[#174540]! text-white! hover:bg-[#174540]/90! focus:ring-[#174540]/30!"
+                    isLoading={isSubmitting}
+                  >
+                    Send Message
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
