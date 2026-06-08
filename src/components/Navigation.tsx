@@ -46,9 +46,9 @@ export default function Navbar() {
               <Phone size={18} />
               <span className="font-semibold text-sm">Call Now</span>
             </a>
-            <button className="px-6 py-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
-              Book Appointment
-            </button>
+            <Link href="/contact" className="px-6 py-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Contact Us
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -73,9 +73,9 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="px-4 pt-3 flex flex-col gap-2">
-              <button className="w-full px-4 py-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-semibold">
-                Book Appointment
-              </button>
+              <Link href="/contact" className="w-full px-4 py-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-semibold text-center">
+                Contact Us
+              </Link>
             </div>
           </div>
         )}

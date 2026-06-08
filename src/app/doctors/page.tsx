@@ -204,7 +204,7 @@ export default function DoctorsPage() {
                       {/* Action Button */}
                       <button className="mt-auto flex w-full items-center justify-center gap-2 rounded-full border border-[#174440]/20 bg-transparent py-3.5 text-sm font-medium text-[#174440] transition-all group-hover:bg-[#174440] group-hover:text-white group-hover:border-[#174440]">
                         <CalendarPlus className="h-4 w-4" />
-                        Book Appointment
+                        Contact Us
                       </button>
                     </div>
                   </motion.div>

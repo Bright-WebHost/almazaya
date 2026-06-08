@@ -73,8 +73,8 @@ export default function CTASection() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="mb-8 sm:mb-10 text-[2.25rem] font-medium leading-[1.1] tracking-tight text-white sm:text-[3rem] md:text-[4rem]"
             >
-              Ready to Book <br />
-              <span className="font-serif italic text-white/80">Your Appointment?</span>
+              Need Medical Care? <br />
+              <span className="font-serif italic text-white/80">Reach Our Team</span>
             </motion.h2>
 
             {/* Buttons Container */}

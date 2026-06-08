@@ -47,11 +47,14 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right: Book Appointment CTA */}
+        {/* Right: Contact CTA */}
         <div className="hidden items-center lg:flex">
-          <button className="rounded-full px-7 py-3 text-[15px] font-medium transition-all duration-300 bg-[#174440] text-white hover:bg-[#113330] hover:shadow-[0_4px_20px_rgba(23,68,64,0.3)]">
-            Book Appointment
-          </button>
+          <Link
+            href="/contact"
+            className="rounded-full px-7 py-3 text-[15px] font-medium transition-all duration-300 bg-[#174440] text-white hover:bg-[#113330] hover:shadow-[0_4px_20px_rgba(23,68,64,0.3)]"
+          >
+            Contact Us
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -77,9 +80,12 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <button className="mt-6 w-full rounded-full bg-[#174440] px-5 py-4 text-sm font-medium text-white hover:bg-[#113330]">
-              Book Appointment
-            </button>
+            <Link
+              href="/contact"
+              className="mt-6 w-full rounded-full bg-[#174440] px-5 py-4 text-center text-sm font-medium text-white hover:bg-[#113330]"
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
       )}

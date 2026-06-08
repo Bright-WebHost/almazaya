@@ -25,26 +25,12 @@ export type Service = {
   department?: string
 }
 
-export type Appointment = {
-  id: string
-  patientName: string
-  patientEmail: string
-  patientPhone: string
-  doctorId: string
-  date: Date
-  time: string
-  duration: 'thirty-min' | 'one-hour'
-  medicalHistory?: string
-  insuranceInfo?: string
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
-}
-
 export type ContactMessage = {
   id: string
   name: string
   email: string
   phone?: string
-  subject: 'general' | 'appointment' | 'feedback'
+  subject: 'general' | 'consultation' | 'feedback'
   message: string
   createdAt: Date
   status: 'new' | 'read' | 'responded'

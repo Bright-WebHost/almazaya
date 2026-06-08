@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import Link from 'next/link'
 import React, { useState, useEffect } from "react";
 
 // ------------------------------------------------------------------
@@ -121,9 +122,12 @@ export default function HeroSection() {
           </p>
 
           <div className="relative mt-10 flex flex-col sm:flex-row w-full sm:w-auto gap-4">
-            <button className="w-full sm:w-auto rounded-full bg-[#D4B670] px-8 py-4 md:py-3.5 text-[15px] font-semibold text-[#174440] transition-all duration-300 hover:bg-white hover:shadow-[0_0_30px_rgba(212,182,112,0.2)]">
-              Book Appointment
-            </button>
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto rounded-full bg-[#D4B670] px-8 py-4 md:py-3.5 text-[15px] font-semibold text-[#174440] transition-all duration-300 hover:bg-white hover:shadow-[0_0_30px_rgba(212,182,112,0.2)] text-center"
+            >
+              Contact Us
+            </Link>
 
             <button className="w-full sm:w-auto rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-8 py-4 md:py-3.5 text-[15px] font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40">
               Our Services

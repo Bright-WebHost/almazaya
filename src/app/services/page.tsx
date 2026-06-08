@@ -302,10 +302,10 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.58 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <button className="group flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:bg-white hover:shadow-[0_0_40px_rgba(212,182,112,0.4)] active:scale-[0.97]">
-              Book an Appointment
+            <Link href="/contact" className="group flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:bg-white hover:shadow-[0_0_40px_rgba(212,182,112,0.4)] active:scale-[0.97]">
+              Contact Us
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
-            </button>
+            </Link>
             <a href="tel:+966505387020" className="flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-white">
               <Phone className="h-4 w-4" strokeWidth={1.8} />
               +966 50 538 7020

@@ -193,7 +193,7 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20"
                   >
                     <option value="general">General Inquiry</option>
-                    <option value="appointment">Appointment Related</option>
+                    <option value="consultation">Consultation Request</option>
                     <option value="feedback">Feedback</option>
                   </select>
                   {errors.subject && (

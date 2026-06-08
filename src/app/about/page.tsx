@@ -104,7 +104,7 @@ function HeroSection() {
             href="tel:+966505387020"
             className="px-6 py-3.5 lg:px-7 lg:py-3.5 bg-[#2a6b5e] text-white rounded-full font-semibold text-xs lg:text-sm hover:bg-[#1a5040] transition-colors duration-300 flex items-center justify-center gap-2 whitespace-nowrap"
           >
-            Book Appointment
+            Call Us
           </a>
           <a
             href="#story"

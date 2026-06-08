@@ -62,10 +62,10 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="group px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-                Book Appointment
+              <Link href="/contact" className="group px-8 py-4 bg-linear-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                Contact Us
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
               <button className="px-8 py-4 border-2 border-gray-300 text-gray-900 rounded-lg font-bold text-lg hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 Learn More
               </button>
