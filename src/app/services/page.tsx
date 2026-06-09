@@ -6,9 +6,283 @@ import {
   ArrowRight, ArrowUpRight, Phone, MessageCircle, Mail,
   Check, Stethoscope, Heart, Baby, Sparkles,
   Brain, Users, Scissors, FlaskConical, AlertCircle, Home,
-  HardHat, Microscope
+  HardHat, Microscope, ChevronDown
 } from 'lucide-react'
 import Link from 'next/link'
+
+// ─── DECORATIVE COMPONENTS ────────────────────────────────────────────────────
+
+// Animated SVG Blob
+function AnimatedBlob({ 
+  top, 
+  left, 
+  right,
+  bottom,
+  size = 200, 
+  delay = 0, 
+  opacity = 0.1 
+}: { 
+  top?: string; 
+  left?: string;
+  right?: string;
+  bottom?: string;
+  size?: number;
+  delay?: number;
+  opacity?: number;
+}) {
+  return (
+    <motion.svg
+      viewBox="0 0 200 200"
+      style={{ top, left, right, bottom, position: 'absolute', width: size, height: size }}
+      initial={{ opacity: 0 }}
+      animate={{ 
+        opacity: opacity,
+        rotate: [0, 360],
+        scale: [1, 1.1, 1]
+      }}
+      transition={{ 
+        duration: 20 + delay, 
+        repeat: Infinity,
+        delay: delay
+      }}
+      className="pointer-events-none"
+    >
+      <defs>
+        <filter id={`blob-${delay}`}>
+          <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" />
+        </filter>
+      </defs>
+      <circle cx="100" cy="100" r="80" fill="#D4B670" filter={`url(#blob-${delay})`} />
+    </motion.svg>
+  )
+}
+
+// Floating Circle with Border
+function FloatingCircle({ 
+  top, 
+  left, 
+  right,
+  bottom,
+  size = 100, 
+  delay = 0, 
+  borderColor = '#D4B670' 
+}: { 
+  top?: string; 
+  left?: string;
+  right?: string;
+  bottom?: string;
+  size?: number;
+  delay?: number;
+  borderColor?: string;
+}) {
+  return (
+    <motion.div
+      style={{ top, left, right, bottom, position: 'absolute' }}
+      animate={{ y: [0, -20, 0] }}
+      transition={{ duration: 4 + delay, repeat: Infinity, delay: delay }}
+      className="pointer-events-none"
+    >
+      <div
+        style={{
+          width: size,
+          height: size,
+          borderRadius: '50%',
+          border: `2px solid ${borderColor}`,
+          opacity: 0.15,
+        }}
+      />
+    </motion.div>
+  )
+}
+
+// Animated Line
+function AnimatedLine({ 
+  x1, y1, x2, y2, 
+  startPosition = 0,
+  delay = 0 
+}: { 
+  x1: number; 
+  y1: number; 
+  x2: number; 
+  y2: number; 
+  startPosition?: number;
+  delay?: number;
+}) {
+  const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+  
+  return (
+    <motion.svg
+      viewBox="0 0 1000 1000"
+      style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0 }}
+      className="pointer-events-none"
+    >
+      <motion.line
+        x1={x1}
+        y1={y1}
+        x2={x2}
+        y2={y2}
+        stroke="#D4B670"
+        strokeWidth="2"
+        strokeDasharray={length}
+        strokeDashoffset={length}
+        initial={{ strokeDashoffset: length }}
+        animate={{ strokeDashoffset: 0 }}
+        transition={{ duration: 2, delay, ease: 'easeInOut' }}
+        opacity="0.3"
+      />
+    </motion.svg>
+  )
+}
+
+// Decorative Grid Background
+function DecorativeGrid() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <svg className="w-full h-full opacity-5" style={{ minHeight: '100vh' }}>
+        <defs>
+          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#D4B670" strokeWidth="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+    </div>
+  )
+}
+
+// Animated Dot Pattern
+function DotPattern({ count = 5, delay = 0 }: { count?: number; delay?: number }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {Array.from({ length: count }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: 4,
+            height: 4,
+            background: '#D4B670',
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{ 
+            opacity: [0.2, 0.6, 0.2],
+            scale: [1, 1.5, 1]
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity,
+            delay: delay + i * 0.2
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+// Curved Decorative Line
+function CurvedLine({ top, right, size = 300 }: { top: string; right: string; size?: number }) {
+  return (
+    <motion.svg
+      viewBox="0 0 300 300"
+      style={{ 
+        position: 'absolute', 
+        top, 
+        right, 
+        width: size, 
+        height: size,
+        pointerEvents: 'none'
+      }}
+      initial={{ opacity: 0, rotate: -20 }}
+      animate={{ opacity: 0.3, rotate: 0 }}
+      transition={{ duration: 1.5 }}
+    >
+      <path
+        d="M 10,290 Q 150,50 290,10"
+        fill="none"
+        stroke="#D4B670"
+        strokeWidth="2"
+        strokeDasharray="10,5"
+      />
+    </motion.svg>
+  )
+}
+
+// Hexagon Shape
+function HexagonShape({ 
+  top, 
+  left, 
+  right,
+  bottom,
+  size = 100, 
+  delay = 0 
+}: { 
+  top?: string; 
+  left?: string;
+  right?: string;
+  bottom?: string;
+  size?: number;
+  delay?: number;
+}) {
+  return (
+    <motion.svg
+      viewBox="0 0 100 100"
+      style={{ 
+        position: 'absolute', 
+        top, 
+        left,
+        right,
+        bottom,
+        width: size, 
+        height: size,
+        pointerEvents: 'none'
+      }}
+      animate={{ rotate: [0, 360] }}
+      transition={{ duration: 15 + delay, repeat: Infinity, delay }}
+    >
+      <polygon
+        points="50,10 90,30 90,70 50,90 10,70 10,30"
+        fill="none"
+        stroke="#A8D5D0"
+        strokeWidth="1.5"
+        opacity="0.4"
+      />
+    </motion.svg>
+  )
+}
+
+// Triangle Shape
+function TriangleShape({ top, right, size = 80, delay = 0 }: { 
+  top: string; 
+  right: string; 
+  size?: number;
+  delay?: number;
+}) {
+  return (
+    <motion.svg
+      viewBox="0 0 100 100"
+      style={{ 
+        position: 'absolute', 
+        top, 
+        right, 
+        width: size, 
+        height: size,
+        pointerEvents: 'none'
+      }}
+      animate={{ y: [0, 15, 0] }}
+      transition={{ duration: 5 + delay, repeat: Infinity, delay }}
+    >
+      <polygon
+        points="50,10 90,90 10,90"
+        fill="none"
+        stroke="#D4B670"
+        strokeWidth="1.5"
+        opacity="0.3"
+      />
+    </motion.svg>
+  )
+}
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
@@ -199,6 +473,19 @@ const faqs = [
   },
 ]
 
+// ─── PROGRESS SCROLL INDICATOR ────────────────────────────────────────────────
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll()
+
+  return (
+    <motion.div
+      style={{ scaleX: scrollYProgress }}
+      className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-[#D4B670] via-[#A8D5D0] to-[#D4B670] origin-left z-50"
+    />
+  )
+}
+
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 
 function HeroSection() {
@@ -211,6 +498,25 @@ function HeroSection() {
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0e2724]">
 
+      {/* Decorative Background Elements */}
+      <AnimatedBlob top="-10%" left="-5%" size={300} delay={0} opacity={0.08} />
+      <AnimatedBlob top="40%" right="-8%" size={250} delay={2} opacity={0.06} />
+      <FloatingCircle top="15%" left="10%" size={150} delay={0} borderColor="#A8D5D0" />
+      <FloatingCircle top="60%" right="8%" size={120} delay={1} borderColor="#D4B670" />
+      <HexagonShape top="20%" right="5%" size={100} delay={0} />
+
+      {/* Grid Background */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <svg className="w-full h-full">
+          <defs>
+            <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1" fill="#D4B670" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-grid)" />
+        </svg>
+      </div>
+
       {/* BG photo with parallax */}
       <motion.div style={{ y: imgY }} className="absolute inset-0 z-0">
         <img
@@ -222,13 +528,17 @@ function HeroSection() {
         <div className="absolute inset-0 bg-linear-to-t from-[#0e2724]/80 via-transparent to-transparent" />
       </motion.div>
 
+      {/* Animated gradient orbs */}
+      <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#D4B670]/10 blur-3xl animate-pulse" />
+      <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#A8D5D0]/05 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+
       {/* Noise grain */}
       <div
         className="pointer-events-none absolute inset-0 z-10 opacity-[0.03]"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }}
       />
 
-      {/* Floating pill badges */}
+      {/* Floating pill badges with enhanced animations */}
       {[
         { label: 'Emergency 24/7',  top: '22%', right: '8%',  delay: 0.6 },
         { label: '13+ Specialties', top: '42%', right: '14%', delay: 0.8 },
@@ -236,13 +546,21 @@ function HeroSection() {
       ].map((b) => (
         <motion.div
           key={b.label}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: b.delay }}
+          initial={{ opacity: 0, x: 20, y: 0 }}
+          animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
+          transition={{ 
+            duration: 0.7, 
+            delay: b.delay,
+            y: { duration: 3, repeat: Infinity, delay: b.delay }
+          }}
           style={{ top: b.top, right: b.right }}
-          className="absolute z-20 hidden items-center gap-2 rounded-full border border-white/15 bg-white/08 px-4 py-2 text-sm font-medium text-white backdrop-blur-md lg:flex"
+          className="absolute z-20 hidden items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-lg shadow-lg shadow-[#D4B670]/10 lg:flex hover:bg-white/15 transition-colors"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-[#D4B670]" />
+          <motion.span 
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: b.delay }}
+            className="h-2 w-2 rounded-full bg-[#D4B670] shadow-lg shadow-[#D4B670]/60"
+          />
           {b.label}
         </motion.div>
       ))}
@@ -272,7 +590,12 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#D4B670]"
           >
-            <span className="h-px w-8 bg-[#D4B670]" />
+            <motion.span 
+              initial={{ width: 0 }}
+              animate={{ width: 32 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="h-px bg-[#D4B670]"
+            />
             Al Mazaya Advanced Medical Complex
           </motion.p>
 
@@ -284,7 +607,7 @@ function HeroSection() {
           >
             Comprehensive<br />
             <span className="font-serif italic text-white/70">Medical</span>{' '}
-            <span className="text-[#D4B670]">Services</span>
+            <span className="bg-linear-to-r from-[#D4B670] to-[#A8D5D0] bg-clip-text text-transparent">Services</span>
           </motion.h1>
 
           <motion.p
@@ -302,18 +625,23 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.58 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <Link href="/contact" className="group flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:bg-white hover:shadow-[0_0_40px_rgba(212,182,112,0.4)] active:scale-[0.97]">
-              Contact Us
+            <Link href="/contact" className="group relative flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all overflow-hidden hover:shadow-[0_0_40px_rgba(212,182,112,0.5)] active:scale-[0.97]">
+              <motion.div
+                className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
+                animate={{ x: ['100%', '-100%'] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="relative">Contact Us</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </Link>
-            <a href="tel:+966505387020" className="flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-white">
+            <a href="tel:+966505387020" className="flex items-center gap-2 text-sm font-medium text-white/60 transition-colors hover:text-[#D4B670]">
               <Phone className="h-4 w-4" strokeWidth={1.8} />
               +966 50 538 7020
             </a>
           </motion.div>
         </div>
 
-        {/* Stat strip — reduced mt-16→mt-8, pt-10→pt-7 */}
+        {/* Stat strip with animated counters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -325,11 +653,16 @@ function HeroSection() {
             { v: '24/7', l: 'Emergency Care' },
             { v: '80+',  l: 'Clinical Staff' },
             { v: '18+',  l: 'Ambulances Active' },
-          ].map((s) => (
-            <div key={s.l}>
-              <p className="text-3xl font-semibold text-[#D4B670] md:text-4xl">{s.v}</p>
+          ].map((s, i) => (
+            <motion.div 
+              key={s.l}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 + i * 0.1 }}
+            >
+              <p className="text-3xl font-semibold bg-linear-to-r from-[#D4B670] to-[#A8D5D0] bg-clip-text text-transparent md:text-4xl">{s.v}</p>
               <p className="mt-1 text-xs font-light tracking-wide text-white/40">{s.l}</p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </motion.div>
@@ -346,22 +679,36 @@ function FilterBar({ active, onChange, count }: {
   count: number
 }) {
   return (
-    <div className="sticky top-0 z-40 border-b border-[#174440]/08 bg-[#FAF9F6]/92 backdrop-blur-xl">
+    <div className="sticky top-0 z-40 border-b border-[#174440]/08 bg-[#FAF9F6]/95 backdrop-blur-xl shadow-sm shadow-[#174440]/05">
+      {/* Decorative circles on filter bar */}
+      <div className="absolute top-0 left-4 w-2 h-2 rounded-full bg-[#D4B670]/20" />
+      <div className="absolute bottom-0 right-8 w-1.5 h-1.5 rounded-full bg-[#A8D5D0]/20" />
+
       <div className="mx-auto flex max-w-350 items-center gap-2 overflow-x-auto px-6 py-3.5 lg:px-10">
-        {filters.map((f) => (
-          <button
+        {filters.map((f, i) => (
+          <motion.button
             key={f.key}
             onClick={() => onChange(f.key)}
-            className={`relative shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 ${
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className={`relative shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
               active === f.key
-                ? 'bg-[#174440] text-white shadow-sm'
-                : 'border border-[#174440]/12 bg-white text-[#174440]/55 hover:border-[#174440]/25 hover:text-[#174440]'
+                ? 'bg-[#174440] text-white shadow-lg shadow-[#174440]/20'
+                : 'border border-[#174440]/15 bg-white text-[#174440]/60 hover:border-[#174440]/30 hover:text-[#174440] hover:shadow-md hover:shadow-[#174440]/05'
             }`}
           >
             {f.label}
-          </button>
+            {active === f.key && (
+              <motion.div
+                layoutId="activeIndicator"
+                className="absolute inset-0 rounded-full bg-[#174440] -z-10"
+                transition={{ type: 'spring', stiffness: 380, damping: 40 }}
+              />
+            )}
+          </motion.button>
         ))}
-        <span className="ml-auto shrink-0 text-xs text-[#174440]/30">{count} services</span>
+        <span className="ml-auto shrink-0 text-xs text-[#174440]/40 font-medium">{count} services</span>
       </div>
     </div>
   )
@@ -381,6 +728,49 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
   return (
     <div ref={ref} className="group relative border-b border-[#174440]/07 last:border-0">
 
+      {/* Decorative elements */}
+      {isInView && (
+        <>
+          <FloatingCircle 
+            top={isEven ? "20%" : "60%"} 
+            left={isEven ? "5%" : "85%"} 
+            size={80} 
+            delay={0} 
+            borderColor="#D4B670"
+          />
+          <HexagonShape 
+            top={isEven ? "70%" : "15%"} 
+            left={isEven ? "90%" : "2%"} 
+            size={60} 
+            delay={0}
+          />
+        </>
+      )}
+
+      {/* Decorative divider line with number */}
+      <motion.div
+        initial={{ opacity: 0, scaleX: 0 }}
+        animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="mx-auto max-w-350 px-6 lg:px-10 origin-left"
+      >
+        <div className="relative h-px bg-linear-to-r from-[#174440]/0 via-[#D4B670]/30 to-[#174440]/0 mb-8 mt-8">
+          <span className="absolute -top-3 left-0 px-2 bg-[#FAF9F6] text-[#D4B670] text-xs font-mono font-bold tracking-widest">
+            {service.num}
+          </span>
+          {/* Dots along the line */}
+          {[0, 1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1.5 h-1.5 rounded-full bg-[#D4B670]/40"
+              style={{ top: '-3px', left: `${25 * (i + 1)}%` }}
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+            />
+          ))}
+        </div>
+      </motion.div>
+
       <div className="mx-auto grid max-w-350 grid-cols-1 items-stretch lg:grid-cols-2">
 
         {/* IMAGE */}
@@ -388,85 +778,136 @@ function ServiceRow({ service, index }: { service: typeof services[0]; index: nu
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className={`relative overflow-hidden ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
+          className={`relative overflow-hidden group/image ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
         >
           <div className="relative h-75 w-full overflow-hidden lg:h-110">
             <img
               src={imageSrc}
               alt={service.imgAlt}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover/image:scale-[1.06]"
               loading="lazy"
             />
-            {/* Gradient */}
-            <div className="absolute inset-0 bg-linear-to-t from-[#0e2724]/55 via-transparent to-transparent" />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-linear-to-t from-[#0e2724]/60 via-[#0e2724]/20 to-transparent" />
+
+            {/* Decorative shapes on image */}
+            <div className="absolute top-6 right-6 w-12 h-12 border-2 border-white/15 rounded-lg" />
+            <div className="absolute bottom-8 left-6 w-8 h-8 border border-white/20 rounded-full" />
 
             {/* Ghost number */}
             <span className="pointer-events-none absolute right-4 top-4 select-none font-serif text-[6rem] font-bold leading-none tracking-tighter text-white/08 lg:text-[8rem]">
               {service.num}
             </span>
 
-            {/* Badge */}
+            {/* Badge with floating animation */}
             {service.badge && (
-              <span className="absolute left-5 top-5 rounded-full bg-[#D4B670] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#174440]">
+              <motion.span 
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute left-5 top-5 rounded-full bg-linear-to-r from-[#D4B670] to-[#A8D5D0] px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#0e2724] shadow-lg shadow-[#D4B670]/40"
+              >
                 {service.badge}
-              </span>
+              </motion.span>
             )}
+
+            {/* Hover overlay with service highlights */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileHover={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 bg-linear-to-t from-[#0e2724]/95 via-[#0e2724]/70 to-transparent flex flex-col justify-end p-6 pointer-events-none"
+            >
+              <p className="text-white/80 text-sm font-light line-clamp-2">{service.sub}</p>
+            </motion.div>
 
             {/* Bottom bar */}
             <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-              <p className="text-[11px] font-medium uppercase tracking-widest text-white/45">
+              <p className="text-[11px] font-medium uppercase tracking-widest text-white/50">
                 {service.sub}
               </p>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-sm transition-all group-hover:bg-[#D4B670] group-hover:ring-[#D4B670]">
-                <Icon className="h-4 w-4 text-white" strokeWidth={1.6} />
-              </div>
+              <motion.div 
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 ring-1 ring-white/30 backdrop-blur-sm transition-all group-hover/image:bg-[#D4B670] group-hover/image:ring-[#D4B670] group-hover/image:shadow-lg group-hover/image:shadow-[#D4B670]/40 cursor-pointer"
+              >
+                <Icon className="h-5 w-5 text-white" strokeWidth={1.6} />
+              </motion.div>
             </div>
           </div>
         </motion.div>
 
-        {/* TEXT — reduced py-12→py-9, lg:py-16→lg:py-12 */}
+        {/* TEXT */}
         <motion.div
           initial={{ opacity: 0, x: isEven ? 36 : -36 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className={`flex flex-col justify-center px-6 py-9 lg:px-0 lg:py-12 ${
+          className={`flex flex-col justify-center px-6 py-9 lg:px-0 lg:py-12 relative ${
             isEven
               ? 'lg:order-2 lg:pl-14 lg:pr-10'
               : 'lg:order-1 lg:pl-10 lg:pr-14'
           }`}
         >
+          {/* Decorative background circle */}
+          <motion.div
+            className="absolute -z-10 top-0 right-0 w-32 h-32 rounded-full bg-[#D4B670]/05 blur-3xl"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 5, repeat: Infinity }}
+          />
+
           {/* Index label */}
-          <p className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D4B670]">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D4B670]"
+          >
             <span className="font-mono text-[#174440]/20">{service.num}</span>
             {service.sub}
-          </p>
+          </motion.p>
 
-          {/* Title — last word italic serif */}
-          <h2 className="mb-4 text-[clamp(1.9rem,3vw,2.9rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[#174440]">
+          {/* Title */}
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.15 }}
+            className="mb-4 text-[clamp(1.9rem,3vw,2.9rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[#174440]"
+          >
             {service.title.split(' ').slice(0, -1).join(' ')}{' '}
             <span className="font-serif italic text-[#174440]/60">
               {service.title.split(' ').slice(-1)[0]}
             </span>
-          </h2>
+          </motion.h2>
 
           {/* Description */}
-          <p className="mb-6 text-[0.94rem] font-light leading-relaxed text-[#174440]/58">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="mb-6 text-[0.94rem] font-light leading-relaxed text-[#174440]/58"
+          >
             {service.desc}
-          </p>
+          </motion.p>
 
-          {/* Features */}
-          <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-            {service.details.map((d) => (
-              <div key={d} className="flex items-center gap-3">
-                <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#D4B670]/22">
-                  <Check className="h-2.5 w-2.5 text-[#174440]" strokeWidth={3} />
-                </div>
-                <span className="text-[0.82rem] font-medium text-[#174440]/70">{d}</span>
-              </div>
+          {/* Features with staggered animation */}
+          <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {service.details.map((d, i) => (
+              <motion.div 
+                key={d}
+                initial={{ opacity: 0, x: -16 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.08 }}
+                className="flex items-start gap-3 group/item cursor-pointer"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.2 }}
+                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#D4B670]/25 group-hover/item:bg-[#D4B670]/40 transition-colors mt-0.5"
+                >
+                  <Check className="h-3 w-3 text-[#174440]" strokeWidth={3} />
+                </motion.div>
+                <span className="text-[0.82rem] font-medium text-[#174440]/70 group-hover/item:text-[#174440] transition-colors">{d}</span>
+              </motion.div>
             ))}
           </div>
 
-          {/* Actions (removed Learn More button per request) */}
         </motion.div>
       </div>
     </div>
@@ -484,26 +925,31 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.07 }}
-      className="border-b border-[#174440]/10 last:border-0"
+      className="group relative border-b border-[#174440]/10 last:border-0 hover:bg-[#174440]/02 transition-colors duration-300"
     >
+
       <button
         onClick={() => setOpen(!open)}
         className="flex w-full items-start justify-between gap-6 py-6 text-left"
         aria-expanded={open}
       >
         <div className="flex items-start gap-5">
-          <span className="mt-0.5 shrink-0 font-mono text-xs text-[#174440]/22 select-none">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mt-0.5 shrink-0 font-mono text-xs text-[#D4B670] select-none font-bold"
+          >
             0{index + 1}
-          </span>
-          <span className="text-base font-medium text-[#174440]">{faq.q}</span>
+          </motion.span>
+          <span className="text-base font-medium text-[#174440] group-hover:text-[#174440]/80 transition-colors">{faq.q}</span>
         </div>
         <motion.div
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.22 }}
           className="mt-0.5 shrink-0"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#174440]/15 text-[#174440]/40">
-            <span className="text-lg leading-none">+</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#174440]/20 text-[#174440]/50 group-hover:border-[#D4B670]/50 group-hover:text-[#D4B670] transition-all bg-[#174440]/02 group-hover:bg-[#D4B670]/05">
+            <ChevronDown className="h-5 w-5" strokeWidth={1.5} />
           </div>
         </motion.div>
       </button>
@@ -516,8 +962,9 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.32, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="overflow-hidden"
           >
-            <p className="pb-6 pl-9 pr-10 text-[0.92rem] font-light leading-relaxed text-[#174440]/55">
+            <p className="pb-6 pl-13 pr-10 text-[0.92rem] font-light leading-relaxed text-[#174440]/60 bg-linear-to-r from-[#D4B670]/05 to-transparent">
               {faq.a}
             </p>
           </motion.div>
@@ -537,6 +984,16 @@ function CTASection() {
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-[#174440] py-20 lg:py-28">
+      {/* Decorative blobs and shapes */}
+      <AnimatedBlob top="5%" left="2%" size={280} delay={0} opacity={0.12} />
+      <AnimatedBlob bottom="10%" right="3%" size={250} delay={3} opacity={0.08} />
+      <FloatingCircle top="25%" right="10%" size={180} delay={1} borderColor="#A8D5D0" />
+      <HexagonShape top="60%" left="5%" size={120} delay={2} />
+
+      {/* Animated gradient orbs */}
+      <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#D4B670]/15 blur-3xl animate-pulse" />
+      <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#A8D5D0]/08 blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+
       {/* Subtle background image with parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
         <img
@@ -547,7 +1004,6 @@ function CTASection() {
         />
       </motion.div>
       <div className="absolute inset-0 z-0 bg-linear-to-br from-[#174440] via-[#174440]/95 to-[#0d2320]" />
-      <div className="pointer-events-none absolute right-0 top-0 z-0 h-125 w-125 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#D4B670]/07 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-350 px-6 lg:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
@@ -558,10 +1014,19 @@ function CTASection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4B670]">
-              <span className="h-px w-8 bg-[#D4B670]" />
+            <motion.p 
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4B670]"
+            >
+              <motion.span 
+                initial={{ width: 0 }}
+                animate={isInView ? { width: 32 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-px bg-[#D4B670]"
+              />
               Contact Us
-            </p>
+            </motion.p>
             <h2 className="mb-5 text-[clamp(2rem,4vw,3.6rem)] font-medium leading-[1.06] tracking-[-0.02em] text-white">
               Can't find what<br />
               you're looking{' '}
@@ -574,23 +1039,28 @@ function CTASection() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="tel:+966505387020"
-                className="flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:bg-white active:scale-[0.97]"
+                className="relative group overflow-hidden flex items-center gap-2.5 rounded-full bg-[#D4B670] px-7 py-3.5 text-sm font-semibold text-[#174440] transition-all hover:shadow-lg hover:shadow-[#D4B670]/50 active:scale-[0.97]"
               >
-                <Phone className="h-4 w-4" strokeWidth={2} />
-                Call Us
+                <motion.div
+                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent"
+                  animate={{ x: ['100%', '-100%'] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <Phone className="h-4 w-4 relative" strokeWidth={2} />
+                <span className="relative">Call Us</span>
               </a>
               <a
                 href="https://wa.me/966505387020"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/65 transition-all hover:border-white/30 hover:text-white active:scale-[0.97]"
+                className="flex items-center gap-2.5 rounded-full border border-white/20 px-7 py-3.5 text-sm font-medium text-white/75 transition-all hover:border-[#D4B670] hover:text-white hover:bg-white/05 hover:shadow-lg hover:shadow-[#D4B670]/20 active:scale-[0.97]"
               >
                 <MessageCircle className="h-4 w-4" strokeWidth={1.8} />
                 WhatsApp
               </a>
               <a
                 href="mailto:info@mazayamedical.co"
-                className="flex items-center gap-2.5 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/65 transition-all hover:border-white/30 hover:text-white active:scale-[0.97]"
+                className="flex items-center gap-2.5 rounded-full border border-white/20 px-7 py-3.5 text-sm font-medium text-white/75 transition-all hover:border-[#D4B670] hover:text-white hover:bg-white/05 hover:shadow-lg hover:shadow-[#D4B670]/20 active:scale-[0.97]"
               >
                 <Mail className="h-4 w-4" strokeWidth={1.8} />
                 Email
@@ -598,7 +1068,7 @@ function CTASection() {
             </div>
           </motion.div>
 
-          {/* Right — info blocks */}
+          {/* Right — info blocks with enhanced design */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -626,17 +1096,26 @@ function CTASection() {
                 value: 'Kingdom-wide',
                 note: 'On-site clinics deployed across contractor projects.',
               },
-            ].map((c) => (
-              <div
+            ].map((c, i) => (
+              <motion.div
                 key={c.label}
-                className="rounded-2xl border border-white/07 bg-white/04 p-6 backdrop-blur-sm"
+                initial={{ opacity: 0, y: 16 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.15 + i * 0.08 }}
+                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(212, 182, 112, 0.15)' }}
+                className="rounded-2xl border border-white/10 bg-white/06 p-6 backdrop-blur-lg transition-all hover:border-white/20 cursor-pointer group relative"
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#D4B670]/70">
+                {/* Decorative corner accent */}
+                <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#D4B670]/30 rounded-tr-2xl" />
+                
+                <motion.p 
+                  className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#D4B670]/80 group-hover:text-[#D4B670] transition-colors"
+                >
                   {c.label}
-                </p>
+                </motion.p>
                 <p className="mb-2 text-xl font-semibold text-white">{c.value}</p>
-                <p className="text-xs font-light leading-relaxed text-white/38">{c.note}</p>
-              </div>
+                <p className="text-xs font-light leading-relaxed text-white/45 group-hover:text-white/55 transition-colors">{c.note}</p>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -658,6 +1137,9 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-[#FAF9F6]">
 
+      {/* Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* 1. HERO */}
       <HeroSection />
 
@@ -665,7 +1147,11 @@ export default function ServicesPage() {
       <FilterBar active={activeFilter} onChange={setActiveFilter} count={filtered.length} />
 
       {/* 3. SERVICE ROWS */}
-      <section className="bg-[#FAF9F6]">
+      <section className="bg-[#FAF9F6] relative">
+        {/* Background decorations */}
+        <FloatingCircle top="10%" left="5%" size={200} delay={0} borderColor="#D4B670" />
+        <HexagonShape top="50%" right="8%" size={150} delay={1} />
+
         <AnimatePresence mode="wait">
           <motion.div
             key={activeFilter}
@@ -681,8 +1167,11 @@ export default function ServicesPage() {
         </AnimatePresence>
       </section>
 
-      {/* 4. FAQ — reduced py-20→py-14, lg:py-28→lg:py-20 */}
-      <section className="py-14 lg:py-20">
+      {/* 4. FAQ */}
+      <section className="py-14 lg:py-20 relative">
+        {/* Decorative elements in FAQ */}
+        <FloatingCircle top="20%" left="8%" size={120} delay={2} borderColor="#A8D5D0" />
+
         <div className="mx-auto max-w-350 px-6 lg:px-10">
           <div className="grid gap-14 lg:grid-cols-[360px_1fr] lg:gap-20">
 
@@ -695,7 +1184,12 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6 }}
               >
                 <p className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#D4B670]">
-                  <span className="h-px w-8 bg-[#D4B670]" />
+                  <motion.span 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 32 }}
+                    transition={{ duration: 0.6 }}
+                    className="h-px bg-[#D4B670]"
+                  />
                   FAQ
                 </p>
                 <h2 className="mb-4 text-3xl font-medium leading-tight tracking-[-0.02em] text-[#174440] lg:text-4xl">
@@ -707,7 +1201,7 @@ export default function ServicesPage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-[#174440] underline underline-offset-4 decoration-[#D4B670]/50 transition-colors hover:text-[#D4B670]"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#174440] underline underline-offset-4 decoration-[#D4B670]/50 transition-colors hover:text-[#D4B670] hover:decoration-[#D4B670]"
                 >
                   Contact us
                   <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
